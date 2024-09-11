@@ -2,6 +2,42 @@
     Atipera Assesment
 </mat-toolbar>
 <div class="content-wrapper">
-    {{ elementsStore.elements() | json }}
+
+    <mat-card appearance="outlined">
+        <mat-card-header>
+            <mat-card-title>Elements</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            @if (elementsStore.isLoading()) {
+                <app-loading-indicator class="padding"></app-loading-indicator>
+            }
+            <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input [formControl]="filterFormControl" matInput placeholder="Type any value">
+            </mat-form-field>
+            <table #elementsTable [dataSource]="elementsStore.filteredElements()" mat-table>
+                <mat-text-column name="position"></mat-text-column>
+                <mat-text-column name="name"></mat-text-column>
+                <mat-text-column name="weight"></mat-text-column>
+                <mat-text-column name="symbol"></mat-text-column>
+
+                <ng-container matColumnDef="actions">
+                    <th *matHeaderCellDef mat-header-cell> Actions</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <button (click)="openEditDialog(element)" mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: columnsToDisplay;" mat-row></tr>
+            </table>
+            @if (emptyResults()) {
+                <app-no-data-message></app-no-data-message>
+            }
+        </mat-card-content>
+    </mat-card>
+
 </div>
 

@@ -19,12 +19,15 @@ const initialState: ElementsState = {
 
 export const ElementsStore = signalStore(
   withState(initialState),
-  withComputed(({elements, filterQuery}) => ({
-    filteredElements: computed(() => {
-      const filterString = filterQuery();
+  withComputed(({elements, filterQuery, isLoading}) => ({
+    filteredElements: computed<PeriodicElement[]>(() => {
+      const filterString = filterQuery().trim().toLowerCase();
+      if (!filterString) {
+        return elements();
+      }
       return elements().filter((element) =>
-        element.name.includes(filterString) ||
-        element.symbol.includes(filterString) ||
+        element.name.toLowerCase().includes(filterString) ||
+        element.symbol.toLowerCase().includes(filterString) ||
         element.position.toString().includes(filterString) ||
         element.weight.toString().includes(filterString),
       );

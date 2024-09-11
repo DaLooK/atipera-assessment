@@ -22,6 +22,6 @@ export class PeriodicTableService {
     if (elementToUpdate) {
       Object.assign(elementToUpdate, lodash.omit(element, 'position'));
     }
-    return of(!!elementToUpdate).pipe(delay(3000));
+    return of(!!elementToUpdate).pipe(delay(1000));
   }
 }

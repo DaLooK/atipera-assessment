@@ -9,12 +9,13 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-
 $theme: mat.define-theme();
 
-mat-toolbar.mat-primary {
+:root {
+  --primary-color: #{mat.get-theme-color($theme, primary)};
+}
 
+mat-toolbar.mat-primary {
   --mat-toolbar-container-text-color: #{mat.get-theme-color($theme, on-primary)};
   --mat-toolbar-container-background-color: #{mat.get-theme-color($theme, primary)};
 }
-

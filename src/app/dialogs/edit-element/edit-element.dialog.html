@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Edit {{ periodicElement.name }}</h2>
+<mat-dialog-content>
+    <form [formGroup]="elementForm">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput type="text"/>
+            @if (elementForm.get('name')?.invalid) {
+                <mat-error>Name field is required.</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Symbol</mat-label>
+            <input formControlName="symbol" matInput type="text"/>
+            @if (elementForm.get('symbol')?.invalid) {
+                <mat-error>Symbol field is required.</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Weight</mat-label>
+            <input formControlName="weight" matInput step="0.0001" type="numeric"/>
+            @if (elementForm.get('weight')?.invalid) {
+                <mat-error>Weight field is required.</mat-error>
+            }
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button (click)="cancelDialog()" mat-button>Cancel</button>
+    <button (click)="submitDialog()" mat-button>Save changes</button>
+</mat-dialog-actions>
