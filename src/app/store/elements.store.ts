@@ -45,9 +45,9 @@ export const ElementsStore = signalStore(
         patchState(store, {elements: elements});
       });
     },
-    updateElement(position: number, element: Omit<PeriodicElement, 'position'>) {
+    updateElement(id: number, element: Omit<PeriodicElement, 'id'>) {
       patchState(store, {isLoading: true});
-      periodicTableService.updateElement(position, element).subscribe(
+      periodicTableService.updateElement(id, element).subscribe(
         (elementWasUpdatedCorrectly) => {
           if (elementWasUpdatedCorrectly) {
             snackBar.open('Element updated correctly');

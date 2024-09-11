@@ -2,6 +2,13 @@
 <mat-dialog-content>
     <form [formGroup]="elementForm">
         <mat-form-field>
+            <mat-label>Position</mat-label>
+            <input formControlName="position" matInput type="text"/>
+            @if (elementForm.get('position')?.invalid) {
+                <mat-error>Position field is required to be more or equal to 1.</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
             <mat-label>Name</mat-label>
             <input formControlName="name" matInput type="text"/>
             @if (elementForm.get('name')?.invalid) {

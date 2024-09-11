@@ -96,12 +96,15 @@ export class HomeComponent implements OnInit {
 
 
   openEditDialog(element: PeriodicElement) {
+    if (element.id === undefined) {
+      return;
+    }
     const dialogRef = this.matDialog.open(EditElementDialog, {
       data: element,
     });
     dialogRef.afterClosed().pipe(take(1)).subscribe((newElementDetails) => {
       if (newElementDetails) {
-        this.elementsStore.updateElement(element.position, newElementDetails);
+        this.elementsStore.updateElement(element.id!, newElementDetails);
       }
     });
   }

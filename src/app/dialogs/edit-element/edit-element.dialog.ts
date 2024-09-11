@@ -35,6 +35,7 @@ import lodash from 'lodash';
 })
 export class EditElementDialog implements OnInit {
   elementForm = new FormGroup({
+    'position': new FormControl(0, [Validators.required, Validators.min(1)]),
     'name': new FormControl('', Validators.required),
     'symbol': new FormControl('', Validators.required),
     'weight': new FormControl(0, [Validators.required, CustomValidators.greaterThan(0)]),
@@ -45,7 +46,7 @@ export class EditElementDialog implements OnInit {
   }
 
   ngOnInit(): void {
-    this.elementForm.setValue(lodash.pick(this.periodicElement, ['name', 'symbol', 'weight']));
+    this.elementForm.setValue(lodash.pick(this.periodicElement, ['position', 'name', 'symbol', 'weight']));
   }
 
   cancelDialog() {

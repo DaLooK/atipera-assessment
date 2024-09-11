@@ -8,7 +8,12 @@ import lodash from 'lodash';
   providedIn: 'root',
 })
 export class PeriodicTableService {
-  private fakeElementsInServer = ELEMENT_DATA;
+  private fakeElementsInServer = ELEMENT_DATA.map((element, index) => {
+    return {
+      ...element,
+      id: index,
+    };
+  });
 
   constructor() {
   }
@@ -17,10 +22,10 @@ export class PeriodicTableService {
     return of(lodash.cloneDeep(this.fakeElementsInServer)).pipe(delay(3000));
   }
 
-  updateElement(position: number, element: Omit<PeriodicElement, 'position'>): Observable<boolean> {
-    const elementToUpdate: PeriodicElement | undefined = this.fakeElementsInServer.find((element) => element.position === position);
+  updateElement(id: number, element: Omit<PeriodicElement, 'id'>): Observable<boolean> {
+    const elementToUpdate: PeriodicElement | undefined = this.fakeElementsInServer.find((element) => element.id === id);
     if (elementToUpdate) {
-      Object.assign(elementToUpdate, lodash.omit(element, 'position'));
+      Object.assign(elementToUpdate, lodash.omit(element, 'id'));
     }
     return of(!!elementToUpdate).pipe(delay(1000));
   }
