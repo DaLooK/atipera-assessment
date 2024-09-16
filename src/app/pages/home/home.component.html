@@ -2,20 +2,20 @@
     Atipera Assessment
 </mat-toolbar>
 <div class="content-wrapper">
+    @if (isLoading()) {
+        <app-loading-indicator></app-loading-indicator>
+    }
 
     <mat-card appearance="outlined">
         <mat-card-header>
             <mat-card-title>Elements</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            @if (elementsStore.isLoading()) {
-                <app-loading-indicator class="padding"></app-loading-indicator>
-            }
             <mat-form-field>
                 <mat-label>Filter</mat-label>
                 <input [formControl]="filterFormControl" matInput placeholder="Type any value">
             </mat-form-field>
-            <table #elementsTable [dataSource]="elementsStore.filteredElements()" mat-table>
+            <table #elementsTable [dataSource]="filteredElements()" mat-table>
                 <mat-text-column name="position"></mat-text-column>
                 <mat-text-column name="name"></mat-text-column>
                 <mat-text-column name="weight"></mat-text-column>

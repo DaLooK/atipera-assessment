@@ -20,7 +20,7 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
-    "@ngrx/signals": "^18.0.2",
+    "@rx-angular/state": "^18.0.0",
     "@types/lodash": "^4.17.7",
     "lodash": "^4.17.21",
     "rxjs": "~7.8.0",
